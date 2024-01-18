@@ -17,10 +17,11 @@ import java.util.Date;
 public class Discount {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="discount_type", nullable = false)
+    @Column(name = "discount_type")
+    @Enumerated(EnumType.STRING)
     private DiscountType type;
 
     @Column(name="code", length = 50, nullable=false)

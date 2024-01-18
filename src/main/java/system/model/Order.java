@@ -16,10 +16,10 @@ import java.util.Date;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName="id")
     private User user;
 
@@ -29,7 +29,11 @@ public class Order {
     @Column(name="total_price", precision = 10, scale = 2)
     private String totalPrice;
 
-    @Column(name="status", nullable=false)
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @OneToOne(mappedBy = "order")
+    private Payment payment;
 
 }

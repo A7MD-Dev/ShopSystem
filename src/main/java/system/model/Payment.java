@@ -16,17 +16,19 @@ import java.util.Date;
 public class Payment {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
     @JoinColumn(name="order_id", referencedColumnName="id")
     private Order order;
 
-    @Column(name = "payment_method", length = 50, nullable = false)
-    private Date paymentMethod;
+    @Column(name = "payment_method")
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
 
-    @Column(name="payment_status", nullable = false)
+    @Column(name = "payment_status")
+    @Enumerated(EnumType.STRING)
     private PaymentStatus status;
 
     @Column(name="transaction_id", length = 255, nullable=false)
