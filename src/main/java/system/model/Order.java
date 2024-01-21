@@ -1,5 +1,7 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +22,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="user_id", referencedColumnName="id")
     private User user;
 
@@ -34,6 +37,7 @@ public class Order {
     private OrderStatus status;
 
     @OneToOne(mappedBy = "order")
+    @JsonManagedReference
     private Payment payment;
 
 }

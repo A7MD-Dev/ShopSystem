@@ -1,5 +1,7 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +36,7 @@ public class Product {
     private int quantity;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="category_id", referencedColumnName="id")
     private Category category;
 
@@ -41,8 +44,10 @@ public class Product {
     private String imgUrl;
 
     @OneToMany(mappedBy = "product")
+    @JsonManagedReference
     private Set<Review> productReviews;
 
     @ManyToMany(mappedBy = "wishlistProducts")
+    @JsonManagedReference
     private Set<User> productWishlists;
 }

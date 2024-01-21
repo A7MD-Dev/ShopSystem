@@ -1,5 +1,7 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,19 +35,24 @@ public class User {
     private String password;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name="role_id", referencedColumnName="id")
     private Role role;
 
     @OneToOne(mappedBy = "user")
+    @JsonManagedReference
     private ShippingAddress shippingAddress;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private Set<Order> userOrders;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private Set<Review> userReviews;
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(
         name = "wishlists",
         joinColumns = @JoinColumn(name = "user_id"),

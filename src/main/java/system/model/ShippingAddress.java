@@ -1,5 +1,6 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class ShippingAddress {
     private Long id;
 
     @OneToOne
+    @JsonBackReference
     @JoinColumn(name="user_id", referencedColumnName="id")
     private User user;
 

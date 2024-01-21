@@ -1,5 +1,6 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,7 @@ public class Permission {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name="role_id", referencedColumnName="id")
     private Role role;
 

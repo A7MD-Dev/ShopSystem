@@ -1,5 +1,6 @@
 package system.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,8 +24,10 @@ public class Role {
     private String roleName;
 
     @OneToOne(mappedBy = "role")
+    @JsonManagedReference
     private User user;
 
     @OneToMany(mappedBy = "role")
+    @JsonManagedReference
     private Set<Permission> rolePermissions;
 }
